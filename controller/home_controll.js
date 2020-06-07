@@ -1,4 +1,4 @@
 module.exports.home=function(req,res)
 {
-    res.send("hi");
+    res.render('home');
 }

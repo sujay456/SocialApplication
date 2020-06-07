@@ -3,8 +3,18 @@ const port=8000;
 
 const app=express();
 
+const expressLayout=require('express-ejs-layouts');
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
+
+
 app.set('view engine','ejs');
 app.set('views','./views');
+
+app.use(express.static('./assets'));
+// use it before routes
+app.use(expressLayout);
+
 app.use('/',require('./routes'));
 
 
