@@ -1,4 +1,12 @@
 body
 {
     text-align: center;
+    background-color: aquamarine;
+}
+
+#footer
+{
+    position: absolute;
+    left: 49%;
+    bottom: 0px;
 }
