@@ -12,5 +12,12 @@ router.get('/sign_in',profileController.signin);
 
 router.get('/sign_up',profileController.signup);
 
+
+// For the signing up
 router.post('/create',profileController.create);
+
+
+//for the signing in
+router.post('/create-session',profileController.session);
+
 module.exports=router;

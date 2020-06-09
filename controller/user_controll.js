@@ -2,7 +2,36 @@ const Profile=require('../model/user');
 
 module.exports.profile=function(req,res)
 {
-    res.render('profile');
+    console.log(req.cookies.user_id);
+    res.cookie('something',"hello cookie");
+    if(req.cookies.user_id)
+    {
+        Profile.findById(req.cookies.user_id,function(err,user)
+        {
+            if(err)
+            {
+                console.log("err in still logging in");
+                return ;
+            }
+            if(user)
+            {
+                return res.render('profile',
+                {
+                    info:user
+                });
+            }
+            else
+            {
+                return res.redirect('/user/sign_in');
+
+            }
+        });
+    }
+    else{
+        return res.redirect('/user/sign_in');
+    }
+
+
 }
 
 module.exports.signin=function(req,res)
@@ -38,7 +67,7 @@ module.exports.create=function(req,res)
                 }
 
                 return res.redirect('/user/sign_in');
-            })
+            });
         }
         else
         {
@@ -46,6 +75,43 @@ module.exports.create=function(req,res)
             return res.redirect('back');
 
         }
-    })
+    });
 }
 
+//for the signing in 
+
+module.exports.session=function(req,res)
+{
+    console.log(req.body);
+    
+    Profile.findOne(req.body,function(err,presentProfile)
+    {
+        if(err)
+        {
+            console.log("Error in finding the account");
+            return;
+        }
+
+        if(!presentProfile)
+        {
+            console.log("There is no such profile");
+            return res.redirect('back');
+        }
+        else
+        {
+            if(req.body.password==presentProfile.password)
+            {
+                    res.cookie('user_id',presentProfile._id);
+                    return res.render('profile',{
+                    info:presentProfile
+                    });
+            
+            }
+            else{
+                return res.redirect('back');
+            }
+
+        }
+    });
+
+}
