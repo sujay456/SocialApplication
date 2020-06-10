@@ -20,4 +20,5 @@ router.post('/create',profileController.create);
 //for the signing in
 router.post('/create-session',profileController.session);
 
+router.get('/clear-cookie',profileController.Signout);
 module.exports=router;

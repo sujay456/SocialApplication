@@ -36,7 +36,34 @@ module.exports.profile=function(req,res)
 
 module.exports.signin=function(req,res)
 {
-    res.render('signin')
+    console.log(req.cookies);
+    if(req.cookies.user_id)
+    {
+        console.log('hi');
+        Profile.findById(req.cookies.user_id,function(err,user)
+        {
+            if(err)
+            {
+                console.log("Error in the signin");
+                return ;
+            }
+            console.log("Here");
+            if(user)
+            {
+                return res.redirect('/user/profile');
+            }
+            else
+            {
+                return res.render('signin');
+
+            }
+            // res.render('signin');
+        });
+    }
+    else
+    {
+        res.render('signin');
+    }
 }
 
 module.exports.signup=function(req,res)
@@ -114,4 +141,11 @@ module.exports.session=function(req,res)
         }
     });
 
+}
+
+module.exports.Signout=function(req,res)
+{
+    res.clearCookie('user_id');
+
+    return res.render('signin');
 }
