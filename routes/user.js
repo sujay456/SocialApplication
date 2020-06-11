@@ -6,7 +6,7 @@ const router=express.Router();
 
 
 
-router.get('/profile',profileController.profile);
+router.get('/profile',passport.checkAuth,profileController.profile);
 
 router.get('/sign_in',profileController.signin);
 
@@ -14,6 +14,7 @@ router.get('/sign_up',profileController.signup);
 
 router.post('/create',profileController.create);
 
+router.get('/sign_out',profileController.destroySession);
 
 //use passport as a middleware to authenticate
 router.post('/create-session',passport.authenticate(

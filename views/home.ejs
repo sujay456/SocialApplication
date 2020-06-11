@@ -3,6 +3,15 @@
         Sujay is on home
     </h1>
 
+    <% if(locals.user){ %>
+        <p>
+         <%= user.name %>
+
+        </p>         
+         <a href="/user/sign_out">Sign out</a>
+
+
+    <% }else {%>
     <a href="/user/sign_up">
         Sign up
     </a>
@@ -10,3 +19,5 @@
     <a href="/user/sign_in">
         Sign in
     </a>
+
+    <% } %>

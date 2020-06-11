@@ -7,11 +7,22 @@ module.exports.profile=function(req,res)
 
 module.exports.signin=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+       return res.redirect('/user/profile');
+    }
+
     res.render('signin')
 }
 
 module.exports.signup=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+       
+        return res.redirect('/user/profile');
+    }
+
     res.render('signup');
 }
 
@@ -55,3 +66,10 @@ module.exports.createSession=function(req,res)
     return res.redirect('/');
 }
 
+module.exports.destroySession=function(req,res)
+{
+//    this logout function is given by passport
+    req.logout();
+
+    return res.redirect('/user/sign_in');
+}

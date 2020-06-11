@@ -20,13 +20,23 @@ const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport_local_startegy');
 
+const MongoStore=require('connect-mongo')(session);
 
 const User=require('./model/user');
+
+app.use(express.static('./assets'));
+// use it before routes
+
+
+
+
 
 app.set('view engine','ejs');
 app.set('views','./views');
 
 //after the views for the encoding of cookies
+
+// name of the cookie,encoding the cokkie,cookie age in miliseconds
 app.use(session({
     name:'codeial',
     secret:'blahsomething',
@@ -34,16 +44,24 @@ app.use(session({
     resave:false,
     cookie:{
         maxAge:(1000*60*100)
+    },
+    store:new MongoStore(
+    {
+        mongooseConnection:db,
+        autoRemove:'disabled'
+    },
+    function(err)
+    {
+        console.log("Hello error");
+        return;
     }
+    )
 
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(express.static('./assets'));
-// use it before routes
-
+app.use(passport.setAuth);
 
 app.use('/',require('./routes'));
 
