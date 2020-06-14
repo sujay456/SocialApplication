@@ -1,9 +1,15 @@
 <link rel="stylesheet" href="/css/home.css">
+    
+    
+
     <h1>
-        Sujay is on home
+        Home page/ 
+        <% if(locals.user){ %>
+            <%= locals.user.name %>
+            <% } %>
     </h1>
 
-    <% if(locals.user){ %>
+    <!-- <% if(locals.user){ %>
         <p>
          <%= user.name %>
 
@@ -20,4 +26,4 @@
         Sign in
     </a>
 
-    <% } %>
+    <% } %> -->

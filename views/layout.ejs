@@ -3,22 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ae87392b1d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <%- style %>
+
     <title>Document</title>
 </head>
 <body>
     
 
-    <div id="header">
-         <%- include('_header');%>
+    <div class="header">
+         <div id="name">
+            <%- include('_header');%>
+         </div>
+         <% if(locals.user){ %>
+            <div class="links">
+                <%- include('_logg') %>
+            </div>
+         <% } else { %>
+            <div class="links">
+                <%- include('_notlogg') %>
+            </div>
+         <% } %>
+
+
     </div>
     
-    <%- body %>
+    <main id="layout-main">
+        <%- body %>
+    </main>
 
     <div id="footer">
-        <%- include('_footer');%>
+        <div id="rights">
+            <%- include('_footer');%>
+        </div>
 
+        <% if(locals.user){ %>
+            <div id="links">
+                <a href="/">Home</a>
+                
+                <a href="/user/profile">Profile</a>
+            </div>
+
+        <% } %>
     </div>
 </body>
 </html>

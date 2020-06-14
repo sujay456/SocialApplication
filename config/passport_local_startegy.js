@@ -74,7 +74,7 @@ passport.checkAuth=function(req,res,next)
 
 passport.setAuth=function(req,res,next)
 {
-    if(passport.authenticate())
+    if(req.isAuthenticated())
     {
         //whenever someone sign in passport set the info in the req.user
         res.locals.user=req.user;

@@ -1,12 +1,8 @@
-body
-{
-    text-align: center;
-    background-color: aquamarine;
+body {
+  margin: 0;
+  text-align: center;
 }
 
-#footer
-{
-    position: absolute;
-    left: 49%;
-    bottom: 0px;
+body #layout-main {
+  height: 100vh;
 }

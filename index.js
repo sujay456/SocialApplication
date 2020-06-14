@@ -22,12 +22,20 @@ const passportLocal=require('./config/passport_local_startegy');
 
 const MongoStore=require('connect-mongo')(session);
 
+// This should be placed before express.static
+const sassMiddleware=require('node-sass-middleware');
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug:true,
+    outputStyle:'expanded',
+    prefix:'/css'
+}));
+
 const User=require('./model/user');
 
 app.use(express.static('./assets'));
 // use it before routes
-
-
 
 
 

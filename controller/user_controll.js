@@ -12,14 +12,13 @@ module.exports.signin=function(req,res)
        return res.redirect('/user/profile');
     }
 
-    res.render('signin')
+    res.render('signin');
 }
 
 module.exports.signup=function(req,res)
 {
     if(req.isAuthenticated())
-    {
-       
+    {       
         return res.redirect('/user/profile');
     }
 
