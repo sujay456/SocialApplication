@@ -1,5 +1,6 @@
 const Profile=require('../model/user');
 
+
 module.exports.profile=function(req,res)
 {
     res.render('profile');
@@ -72,3 +73,4 @@ module.exports.destroySession=function(req,res)
 
     return res.redirect('/user/sign_in');
 }
+

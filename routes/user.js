@@ -16,6 +16,7 @@ router.post('/create',profileController.create);
 
 router.get('/sign_out',profileController.destroySession);
 
+
 //use passport as a middleware to authenticate
 router.post('/create-session',passport.authenticate(
     'local',

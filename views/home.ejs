@@ -9,21 +9,27 @@
             <% } %>
     </h1>
 
-    <!-- <% if(locals.user){ %>
-        <p>
-         <%= user.name %>
+    <% if(locals.user){ %>
+        <section id="post-section">
+            <form action="/post/create" method="POST">
+                <textarea name="content" cols="30" rows="5" placeholder="Add Post..."></textarea>
+                <button type="submit">Publish</button>
+            </form>
+        </section>
 
-        </p>         
-         <a href="/user/sign_out">Sign out</a>
+        <div id="post-container">
+            <% for(let c of post) { %>
+                <div>
+                    <p>
+                        <%= c.content %>
+                        <p>
+                        <%= c.user.name %>
 
+                        </p>
+                    </p>
+                </div>
+            <% } %>
+        </div>
 
-    <% }else {%>
-    <a href="/user/sign_up">
-        Sign up
-    </a>
-
-    <a href="/user/sign_in">
-        Sign in
-    </a>
-
-    <% } %> -->
+        <% } %>
+        

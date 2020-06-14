@@ -11,7 +11,7 @@ router.use('/user',require('./user'));
 
 
 
-router.use('/local',require('./local'));
+router.use('/post',require('./post'));
 
 
 module.exports=router;
