@@ -1,24 +1,49 @@
 #post-container
 {
-    width: 100vw;
+    width: 55%;
     border: 1px solid black;
-    height: 500px;
-    // display: flex;
-    // flex-wrap: wrap;
-    // flex-direction: column;
-    // justify-content: space-between;
+    height: auto;
+    position: absolute;
+    left: 20%;
+    
     div
     {
-        width: 200px;
-        height: 200px;
+        width: 600px;
+        height: 300px;
         display: inline-block;
-        background-color: gray;
+        border-radius: 0.5cm;
+        background-color: rgb(192, 189, 189);
         margin:10px;
+        margin-bottom: 100px;
         p
         {
-            color: white;
+            color: black;
             font-size: 1.2rem;
             font-family: sans-serif;
+        }
+
+        .user
+        {
+            position: relative;
+            right: 240px;
+            top:10px;
+        }
+
+        input
+        {
+            position: relative;
+            top:200px;
+            // right: 50px;
+            width: 80%;
+            height: 50px;
+            border-radius: 0.5cm;
+            font-size: 1.2rem;
+        }
+        button
+        {
+            position: relative;
+            top:200px;
+            height: 50px;
         }
     }
 

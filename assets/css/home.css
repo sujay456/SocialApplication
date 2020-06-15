@@ -1,19 +1,44 @@
 #post-container {
-  width: 100vw;
+  width: 55%;
   border: 1px solid black;
-  height: 500px;
+  height: auto;
+  position: absolute;
+  left: 20%;
 }
 
 #post-container div {
-  width: 200px;
-  height: 200px;
+  width: 600px;
+  height: 300px;
   display: inline-block;
-  background-color: gray;
+  border-radius: 0.5cm;
+  background-color: #c0bdbd;
   margin: 10px;
+  margin-bottom: 100px;
 }
 
 #post-container div p {
-  color: white;
+  color: black;
   font-size: 1.2rem;
   font-family: sans-serif;
+}
+
+#post-container div .user {
+  position: relative;
+  right: 240px;
+  top: 10px;
+}
+
+#post-container div input {
+  position: relative;
+  top: 200px;
+  width: 80%;
+  height: 50px;
+  border-radius: 0.5cm;
+  font-size: 1.2rem;
+}
+
+#post-container div button {
+  position: relative;
+  top: 200px;
+  height: 50px;
 }
