@@ -6,4 +6,5 @@ const CommentController=require('../controller/comment_controll');
 router.post('/create',CommentController.create);
 
 
+
 module.exports=router;

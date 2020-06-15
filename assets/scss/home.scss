@@ -6,7 +6,7 @@
     position: absolute;
     left: 20%;
     
-    div
+    .post
     {
         width: 600px;
         height: 300px;
@@ -15,6 +15,16 @@
         background-color: rgb(192, 189, 189);
         margin:10px;
         margin-bottom: 100px;
+        .comments
+        {
+            position: relative;
+            top:200px;
+            border: 1px solid black;
+        }
+        a{
+            position: relative;
+            top:195px;
+        }
         p
         {
             color: black;
