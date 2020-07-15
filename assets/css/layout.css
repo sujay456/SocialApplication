@@ -1,9 +1,0 @@
-body {
-  margin: 0;
-  text-align: center;
-}
-
-body #layout-main {
-  border: 1px solid red;
-  height: auto;
-}
