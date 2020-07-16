@@ -5,7 +5,7 @@ const User=require('../models/user');
 
 // Here the done function takes two arguments first is the error if not null and other argument as the user if not return false
 passport.use(new LocalStragey({
-    usernameField:email
+    usernameField:'email'
     },
     function(email,password,done){
         User.findOne( {email:email},(err,user)=>{
