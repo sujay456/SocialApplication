@@ -8,7 +8,7 @@ const db=require('./config/mongoose');
 
 app.use(express.urlencoded());
 
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(expressLayouts);
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
