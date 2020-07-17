@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
     <%- style %>
 </head>
 <body>
     <%-include('_header') %>
 
         <!-- No need to tell the browser that this  is the layout file it will automatically detect it and fill it inside the body  -->
-        <%- body %>
+        <main>
+            <%- body %>
+        </main>
 
     <%-include('_footer') %>
 

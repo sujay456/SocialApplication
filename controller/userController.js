@@ -2,15 +2,27 @@ const User=require('../models/user');
 const { findOne } = require('../models/user');
 
 module.exports.profile=(req,res)=>{
-    return res.render('profile');
+    if(req.isAuthenticated())
+    {
+        return res.render('profile');
+    }
+    return res.redirect('/user/signin');
 }
 
 module.exports.signup=(req,res)=>{
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/user/profile');
+    }
     return res.render('signup');
 }
 
 
 module.exports.signin=(req,res)=>{
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/user/profile');
+    }
     return res.render('signin');
 }
 
@@ -44,6 +56,13 @@ module.exports.create=(req,res)=>{
 
 module.exports.createSession=(req,res)=>{
 
+    // console.log(req.user);
     return res.redirect('/');
 
+}
+
+module.exports.signout=(req,res)=>
+{
+    req.logout();
+    res.redirect('/user/signin');
 }

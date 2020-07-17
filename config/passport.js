@@ -41,4 +41,32 @@ passport.deserializeUser( (id,done)=>{
     })
 } );
 
+
+// creating a middleware to check the authentication for pages 
+// It is not a syntax it is middleware which i created of name CheckAuth
+passport.CheckAuth=function(req,res,next){
+
+    if(req.isAuthenticated())
+    {
+        console.log("Authenticated");
+        next();
+    }
+    
+   
+    return res.redirect('/user/signin');
+}
+
+// This is another middleware for setting up the information of the user available to all the ejs file where needed
+
+passport.SetAuthUserInfo=function(req,res,next){
+
+    if(req.isAuthenticated())
+    {
+        res.locals.user=req.user;
+        
+    }
+
+    next();
+}
+
 module.exports=passport;

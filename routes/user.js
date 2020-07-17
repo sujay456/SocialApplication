@@ -8,7 +8,7 @@ router.get('/profile',UserController.profile);
 
 router.get('/signin',UserController.signin);
 router.get('/signup',UserController.signup);
-
+router.get('/signout',UserController.signout);
 // Here passport will be used as a middleware
 router.post('/session',passport.authenticate(
     'local',
