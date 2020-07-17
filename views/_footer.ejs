@@ -1,3 +1,18 @@
 <footer>
-    This is the footer
+    <p>
+        Benends 
+    </p>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <% if(locals.user){ %>
+            <li><a href="/user/signout" >Sign out</a></li>
+            <%} else { %>
+                <li><a href="/user/signin" >Sign in</a></li>
+                <% } %>
+        
+    </ul>
+    <p>All rights reserved</p>
+
+
 </footer>

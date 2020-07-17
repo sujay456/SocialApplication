@@ -1,3 +1,31 @@
  <h1>Hello this is your home page</h1>
     
 
+<section id="feed-post" >
+    
+
+    <% if(locals.user){ %>
+        <h1>Posts</h1>
+        <form id="newpost" action="/post/create" method="post">
+            <textarea name="content"  cols="30" rows="3" placeholder="Type here"></textarea>
+            <input type="submit" value="Post" >
+        </form>
+
+        <h1>Recent Posts</h1>
+
+        <ul>
+            <% for(let p of posts){ %>
+                
+                    <li>
+                        <div>
+                            <p><%= p.content %></p>
+                            <small><%= p.user.name %></small>
+                        </div>
+                    </li>
+                
+            <%}%>
+        </ul>
+
+    <% } %>
+
+</section>

@@ -33,7 +33,7 @@ module.exports.create=(req,res)=>{
     User.findOne({email:req.body.email },(err,user)=>{
         if(err)
         {
-            console.error.bind(console,"Errro");
+            console.error.bind(console,"Errror");
             return;
         }
         if(!user)
@@ -64,5 +64,6 @@ module.exports.createSession=(req,res)=>{
 module.exports.signout=(req,res)=>
 {
     req.logout();
+    res.clearCookie('benends');
     res.redirect('/user/signin');
 }
