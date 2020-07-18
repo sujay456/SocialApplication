@@ -49,7 +49,7 @@ passport.CheckAuth=function(req,res,next){
     if(req.isAuthenticated())
     {
         console.log("Authenticated");
-        next();
+       return  next();
     }
     
    
@@ -66,7 +66,7 @@ passport.SetAuthUserInfo=function(req,res,next){
         
     }
 
-    next();
+   return next();
 }
 
 module.exports=passport;

@@ -17,9 +17,29 @@
             <% for(let p of posts){ %>
                 
                     <li>
-                        <div>
+                        <div class="Post-Container">
                             <p><%= p.content %></p>
                             <small><%= p.user.name %></small>
+                        </div>
+                        <div class="Comment-container">
+
+                            <form action="/comment/create?id=<%= p.id%>" method="post">
+                                <input type="text" name="content" placeholder="Add a Comment" required >
+                                <input type="submit" value="comment" > 
+                            </form>
+                        </div>
+
+                        <div class="comments-display" >
+                            <ul>
+                                <%  for(let c of p.comment){ %>
+                                    <li>
+                                        <p><%= c.content %></p>
+                                        <small><%= c.user.name %></small>
+                                    </li>
+                                    
+
+                                <%}%>
+                            </ul>
                         </div>
                     </li>
                 
