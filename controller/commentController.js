@@ -33,3 +33,31 @@ module.exports.Create=(req,res)=>{
     })
 
 }
+
+module.exports.delete=(req,res)=>{
+
+    Comment.findById(req.query.id,(err,comment)=>{
+        if(err)
+        {
+            console.log("Error in finding the comment to be deleted",err);
+            return;
+        }
+
+        if(comment.user==req.user.id)
+        {
+            let postId=comment.post;
+            comment.remove();
+
+            Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.id} },(err,post)=>{
+                // As we dont need to do anything with the post so we are just returning from here
+                return res.redirect('back');
+            });
+
+        }
+        else
+        {
+            return res.redirect('back');
+
+        }
+    })
+}
