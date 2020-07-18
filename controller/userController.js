@@ -2,11 +2,15 @@ const User=require('../models/user');
 const { findOne } = require('../models/user');
 
 module.exports.profile=(req,res)=>{
-    if(req.isAuthenticated())
-    {
-        return res.render('profile');
-    }
-    return res.redirect('/user/signin');
+
+    
+        User.findById(req.query.userid,(err,user)=>{
+            return res.render('profile',{
+                profile_user:user
+            });
+        })
+    
+    
 }
 
 module.exports.signup=(req,res)=>{

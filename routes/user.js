@@ -4,7 +4,7 @@ const UserController=require('../controller/userController');
 const router=express.Router();
 
 
-router.get('/profile',UserController.profile);
+router.get('/profile',passport.CheckAuth,UserController.profile);
 
 router.get('/signin',UserController.signin);
 router.get('/signup',UserController.signup);

@@ -1,5 +1,6 @@
 const Post =require('../models/post');
 const User =require('../models/user');
+const user = require('../models/user');
 
 module.exports.home=(req,res)=>{
     // console.log(req.cookies);
@@ -26,9 +27,15 @@ module.exports.home=(req,res)=>{
         } 
     })
     .exec( (err,post)=>{
-        return res.render('home',{
-            posts:post
+        
+        User.find({},(err,users)=>{
+            return res.render('home',{
+                posts:post,
+                user_friend:users
+            });
         })
+
+        
     } )
     
 }
