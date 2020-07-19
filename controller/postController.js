@@ -44,6 +44,7 @@ module.exports.postCreate=async (req,res)=>{
             // console.log(newPost);
                 user.post.push(newPost);
                 user.save();
+                req.flash('success','Post publihed');
                 return res.redirect('back');
         }
     } catch (error) {
@@ -54,38 +55,30 @@ module.exports.postCreate=async (req,res)=>{
 }
 
 
-module.exports.delete=(req,res)=>{
+module.exports.delete= async (req,res)=>{
 
-    console.log(req.params.id);
-    Post.findById(req.params.id,(err,post)=>{
-        if(err)
-        {
-            console.log('Error in finding the post to be deleted ',err);
-            return;
-        }
+    // console.log(req.params.id);
+    try {
+        let post=await Post.findById(req.params.id);
 
-        // It is a second check to see whether the user who is deleting the post actually created it 
-
-       if(post.user==req.user.id)
+    if(post.user==req.user.id)
        {
         
             post.remove();
 
-            Comment.deleteMany( {post:req.params.id},(err)=>{
-                if(err)
-                {
-                    console.log("Error in deleting the components",err);
-                    return;
-                }
-                return res.redirect('back');
-            } );
-        
+            await Comment.deleteMany( {post:req.params.id} );
+            
+            req.flash('success','Post deleted');
+            return res.redirect('back');
+
         
        }
        else
        {
             return res.redirect('back');
        }
+    } catch (error) {
+        console.log("Error",error);
+    }
 
-    });
 }

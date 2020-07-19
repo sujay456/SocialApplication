@@ -44,6 +44,8 @@ module.exports.delete= async (req,res)=>{
             comment.remove();
 
             await Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.id} });
+            req.flash('success','comment deleted');
+
             return res.redirect('back');
 
 
@@ -51,6 +53,8 @@ module.exports.delete= async (req,res)=>{
         
         else
         {
+            req.flash('error','comment can not be deleted');
+
             return res.redirect('back');
 
         }
@@ -77,6 +81,7 @@ module.exports.deleteUnAppro=(req,res)=>{
 
                 Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.cid} },(err,post)=>{
                     // As we dont need to do anything with the post so we are just returning from here
+                    req.flash('success','comment deleted');
                     return res.redirect('back');
                 });
                 

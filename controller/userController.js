@@ -50,32 +50,27 @@ module.exports.signin=(req,res)=>{
     return res.render('signin');
 }
 
-module.exports.create=(req,res)=>{
+module.exports.create=async (req,res)=>{
 
     // console.log(req.body);
 
-    User.findOne({email:req.body.email },(err,user)=>{
-        if(err)
+   try {
+    let user=await User.findOne({email:req.body.email });
+
+    if(!user)
         {
-            console.error.bind(console,"Errror");
-            return;
+            await User.create(req.body);
+            req.flash('success','Account  created');
+            return res.redirect('/user/signin');
         }
-        if(!user)
+        else
         {
-            User.create(req.body,(err,newUser)=>{
-                if(err)
-                {
-                    console.error(err);
-                    return;
-                }
-                // console.log(newUser);
-                return res.render('signin');
-            })
-        }
-        else{
+            req.flash('error','Email already in use ');
             res.redirect('back');
-        }
-    })
+        } 
+   } catch (error) {
+       console.loh("Error",error);
+   }
 }
 
 module.exports.createSession=(req,res)=>{
