@@ -1,7 +1,14 @@
+<link rel="stylesheet" href="/css/comment.css">
+
 <li>
     <% if(locals.user.id==c.user.id){ %>
         <small>
             <a href="/comment/delete?id=<%=c.id%>">X</a>
+        </small>
+    <%}%>
+    <% if(locals.user.id== p.user.id && c.user.id!=locals.user.id ){ %>
+        <small class="unAppro" >
+            <a href="/comment/unAppro?cid=<%=c.id%>&pid=<%=p.id%>">Y</a>
         </small>
     <%}%>
     <p><%= c.content %></p>

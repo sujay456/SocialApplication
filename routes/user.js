@@ -6,6 +6,9 @@ const router=express.Router();
 
 router.get('/profile',passport.CheckAuth,UserController.profile);
 
+router.post('/update',passport.CheckAuth,UserController.update);
+
+
 router.get('/signin',UserController.signin);
 router.get('/signup',UserController.signup);
 router.get('/signout',UserController.signout);

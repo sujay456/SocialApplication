@@ -13,6 +13,26 @@ module.exports.profile=(req,res)=>{
     
 }
 
+module.exports.update=(req,res)=>{
+
+    if(req.user.id==req.query.id)
+    {
+        User.findByIdAndUpdate(req.query.id,req.body,(err,Updateduser)=>{
+            if(err)
+            {
+                console.log('Error in updating the user',err);
+                return;
+            }
+
+            return res.redirect('back');
+        });
+    }
+    else 
+    {
+        return res.status(401).send('Unauthorized');
+    }
+}
+
 module.exports.signup=(req,res)=>{
     if(req.isAuthenticated())
     {

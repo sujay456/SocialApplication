@@ -3,7 +3,8 @@ header {
   background-color: #26266d;
   display: flex;
   justify-content: space-between;
-  padding: 9px 15px;
+  padding: 5px 10px;
+  height: 80px;
   box-sizing: border-box; }
   header p {
     color: white;

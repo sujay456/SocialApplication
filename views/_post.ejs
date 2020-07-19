@@ -28,7 +28,7 @@
                 <ul>
                     <%  for(let c of p.comment){ %>
                         
-                        <%- include('_comment',{c:c}) %>
+                        <%- include('_comment',{c:c,p:p}) %>
                 
                     <%}%>
                 </ul>

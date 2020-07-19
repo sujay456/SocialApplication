@@ -54,10 +54,45 @@ module.exports.delete=(req,res)=>{
             });
 
         }
+        
         else
         {
             return res.redirect('back');
 
         }
     })
+}
+
+module.exports.deleteUnAppro=(req,res)=>{
+
+    Post.findById(req.query.pid,(err,post)=>{
+        if(err)
+        {
+            console.log("Error in finding the post in deleting the comment",err);
+            return;
+        }
+        if(post.user==req.user.id)
+        {
+            Comment.findById(req.query.cid,(err,comment)=>{
+                if(err)
+                {
+                    console.log("Error in finding the comment to be deleted",err);
+                    return;
+                }
+                let postId=comment.post;
+                comment.remove();
+
+                Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.cid} },(err,post)=>{
+                    // As we dont need to do anything with the post so we are just returning from here
+                    return res.redirect('back');
+                });
+                
+            })   
+        }
+        else
+        {
+            return res.redirect('back');
+            
+        }
+    });
 }
