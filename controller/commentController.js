@@ -34,24 +34,18 @@ module.exports.Create=(req,res)=>{
 
 }
 
-module.exports.delete=(req,res)=>{
+module.exports.delete= async (req,res)=>{
 
-    Comment.findById(req.query.id,(err,comment)=>{
-        if(err)
-        {
-            console.log("Error in finding the comment to be deleted",err);
-            return;
-        }
+    let comment=await Comment.findById(req.query.id);
 
-        if(comment.user==req.user.id)
+    if(comment.user==req.user.id)
         {
             let postId=comment.post;
             comment.remove();
 
-            Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.id} },(err,post)=>{
-                // As we dont need to do anything with the post so we are just returning from here
-                return res.redirect('back');
-            });
+            await Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.id} });
+            return res.redirect('back');
+
 
         }
         
@@ -60,7 +54,6 @@ module.exports.delete=(req,res)=>{
             return res.redirect('back');
 
         }
-    })
 }
 
 module.exports.deleteUnAppro=(req,res)=>{

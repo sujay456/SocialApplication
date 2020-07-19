@@ -2,7 +2,7 @@ const Post =require('../models/post');
 const User =require('../models/user');
 const user = require('../models/user');
 
-module.exports.home=(req,res)=>{
+module.exports.home= async (req,res)=>{
     // console.log(req.cookies);
     // res.cookie('user',12);
     // Post.find({},(err,posts)=>{
@@ -16,8 +16,8 @@ module.exports.home=(req,res)=>{
     //         posts:posts
     //     });
     // });
-
-    Post.find({})
+    try {
+        let post=await Post.find({})
     .populate('user')
     .populate({
         path:'comment',
@@ -25,17 +25,20 @@ module.exports.home=(req,res)=>{
         {
             path:'user'
         } 
-    })
-    .exec( (err,post)=>{
-        
-        User.find({},(err,users)=>{
-            return res.render('home',{
-                posts:post,
-                user_friend:users
-            });
-        })
+    });
+    
+    let users=await User.find({});
 
-        
-    } )
+    return res.render('home',{
+        posts:post,
+        user_friend:users
+    });
+    } catch (error) {
+        console.log("Errro".error);
+    }
+
+   
+
+    
     
 }
