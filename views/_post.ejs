@@ -1,7 +1,6 @@
-<ul>
-<% for(let p of posts){ %>
+
     
-        <li>
+        <li id="post-<%=p.id%>" >
             
                                       
             <div class="Post-Container">
@@ -9,7 +8,7 @@
 
                 <% if(locals.user.id==p.user.id){ %>
                     <small>
-                        <a href="/post/delete/<%=p.id%>" >X</a>
+                        <a class="delete-post-button" href="/post/delete/<%=p.id%>" >X</a>
                     </small>
                 <%}%>
                  
@@ -35,5 +34,3 @@
             </div>
         </li>
     
-<%}%>
-</ul>

@@ -7,7 +7,7 @@
 
         <% if(locals.user){ %>
             <h1>Posts</h1>
-            <form id="newpost" action="/post/create" method="post">
+            <form id="home-post-form" action="/post/create" method="post">
                 <textarea name="content"  cols="30" rows="3" placeholder="Type here"></textarea>
                 <input type="submit" value="Post" >
             </form>
@@ -15,7 +15,12 @@
             <h1>Recent Posts</h1>
 
             <div id="Post-container">
-                <%- include('_post')   %>
+                <ul>
+                    <% for(let p of posts){ %>
+                        <%- include('_post',{p:p})   %>
+
+                    <%}%>
+                </ul>
             </div>
         
 
@@ -36,3 +41,5 @@
 
     </section>
 </div>
+
+<script src="/js/home.js" ></script>

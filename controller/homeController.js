@@ -18,21 +18,22 @@ module.exports.home= async (req,res)=>{
     // });
     try {
         let post=await Post.find({})
-    .populate('user')
-    .populate({
-        path:'comment',
-        populate:
-        {
-            path:'user'
-        } 
-    });
-    
-    let users=await User.find({});
+        .sort('-createdAt')
+        .populate('user')
+        .populate({
+            path:'comment',
+            populate:
+            {
+                path:'user'
+            } 
+        });
+        
+        let users=await User.find({});
 
-    return res.render('home',{
-        posts:post,
-        user_friend:users
-    });
+        return res.render('home',{
+            posts:post,
+            user_friend:users
+        });
     } catch (error) {
         console.log("Errro".error);
     }

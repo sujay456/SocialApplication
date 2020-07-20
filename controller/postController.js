@@ -39,8 +39,18 @@ module.exports.postCreate=async (req,res)=>{
 
         if(user)
         {
+            // console.log(req);
             let newPost=await Post.create( {content:req.body.content,user:req.user.id });
-            
+
+                if(req.xhr)
+                {
+                    return res.status(200).json({
+                        data:{
+                            post:newPost
+                        },
+                        message:'Post Created!'
+                    });
+                }
             // console.log(newPost);
                 user.post.push(newPost);
                 user.save();
@@ -65,7 +75,15 @@ module.exports.delete= async (req,res)=>{
        {
         
             post.remove();
-
+            if(req.xhr)
+            {
+                return res.status(200).json({
+                    data:{
+                        postId:req.params.id
+                    },
+                    message:'post Deleted'
+                });
+            }
             await Comment.deleteMany( {post:req.params.id} );
             
             req.flash('success','Post deleted');
