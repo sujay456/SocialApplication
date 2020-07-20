@@ -41,20 +41,22 @@ module.exports.postCreate=async (req,res)=>{
         {
             // console.log(req);
             let newPost=await Post.create( {content:req.body.content,user:req.user.id });
-
+                
+                user.post.push(newPost);
+                user.save();
+                // req.flash('success','Post publihed');
                 if(req.xhr)
                 {
                     return res.status(200).json({
                         data:{
-                            post:newPost
+                            post:newPost,
+                            username:user.name
                         },
-                        message:'Post Created!'
+                        message:'Post Created!',
+                        type:'success',
+                        text:'Post Published'
                     });
                 }
-            // console.log(newPost);
-                user.post.push(newPost);
-                user.save();
-                req.flash('success','Post publihed');
                 return res.redirect('back');
         }
     } catch (error) {
@@ -70,23 +72,30 @@ module.exports.delete= async (req,res)=>{
     // console.log(req.params.id);
     try {
         let post=await Post.findById(req.params.id);
-
+        console.log(post);
     if(post.user==req.user.id)
        {
         
+            let userId=post.user;
             post.remove();
+            
+            await User.findByIdAndUpdate(userId,{ $pull:{post:req.params.id} });
+
+
+            await Comment.deleteMany( {post:req.params.id} );
             if(req.xhr)
             {
                 return res.status(200).json({
                     data:{
                         postId:req.params.id
                     },
-                    message:'post Deleted'
+                    message:'post Deleted',
+                    type:'success',
+                    text:'Post Deleted'
                 });
             }
-            await Comment.deleteMany( {post:req.params.id} );
             
-            req.flash('success','Post deleted');
+            
             return res.redirect('back');
 
         

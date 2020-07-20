@@ -5,7 +5,9 @@ module.exports.Create=(req,res)=>{
     // console.log(req.body);
     // console.log(req.query);
   
-    Post.findById(req.query.id,(err,post)=>{
+    Post.findById(req.query.id)
+    .populate('user')
+    .exec((err,post)=>{
         if(err)
         {
             console.log('Error in finding the post on which u are commenting',err);
@@ -25,6 +27,16 @@ module.exports.Create=(req,res)=>{
                 }
                 post.comment.push(newComment);
                 post.save();
+                if(req.xhr)
+                {
+                    return res.status(200).json({
+                        data:{
+                            comment:newComment,
+                            username:post.user.name
+                        },
+                        message:'Comment Posted'
+                    })
+                }
                  return res.redirect('back');
                 
             });
