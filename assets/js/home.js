@@ -23,6 +23,7 @@
                     // .....
                     start(data.data.post._id);
 
+
                 },error: function(error){
                     console.log("error",error.responseText);
                 }
@@ -113,6 +114,7 @@
 
             let postId=self.prop('id').split('-')[1];
             start(postId);
+
         });
     }
     

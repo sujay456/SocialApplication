@@ -2,9 +2,9 @@
 
 <li id="comment-<%=c.id%>" >
     <% if(locals.user.id==c.user.id){ %>
-        <small>
+        
             <a class="delete-comment" href="/comment/delete?id=<%=c.id%>">X</a>
-        </small>
+        
     <%}%>
     <% if(locals.user.id== p.user.id && c.user.id!=locals.user.id ){ %>
         <small class="unAppro" >

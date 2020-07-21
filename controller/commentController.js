@@ -77,7 +77,7 @@ module.exports.delete= async (req,res)=>{
         
         else
         {
-            if(req.xml){
+            if(req.xhr){
                 return res.status(401).json({
                     message:'Comment Not deleted',
                     type:'error',
