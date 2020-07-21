@@ -1,5 +1,7 @@
 
+
 {
+    
     let createPost=function(){
         let newPostForm=$('#home-post-form');
 
@@ -16,6 +18,9 @@
                     $('#Post-container>ul').prepend(newPost);
                     notification(data.type,data.text);
                     deletePost($(' .delete-post-button',newPost));
+
+                    // Here i will have to give commands so that user can comment on the newly generated post
+                    // .....
                 },error: function(error){
                     console.log("error",error.responseText);
                 }
@@ -53,9 +58,9 @@
                         <p>${post.content}</p>
                         <small>${name}</small>
                     </div>
-                    <div class="Comment-container">
+                    <div class="Comment-container" onchange="commentchanged()">
         
-                        <form action="/comment/create?id=${post._id}" method="post">
+                        <form  class="comment-form" action="/comment/create?id=${post._id}" method="post">
                             <input type="text" name="content" placeholder="Add a Comment" required >
                             <input type="submit" value="comment" > 
                         </form>
@@ -71,7 +76,7 @@
     }
 
     let deletePost=function(deleteLink){
-
+        // console.log(deleteLink);
        $(deleteLink).click(function(e)
        {
            e.preventDefault();
@@ -92,12 +97,21 @@
        })
     }
 
-    createPost();
-
-    let alldeleteLinks=$('.delete-post-button');
-    for(let i=0;i<alldeleteLinks.length;++i)
+    // For the existing post to be converted to ajax format
+    let convertPostToAjax=function()
     {
-        deletePost(alldeleteLinks[i]);
+        $('#Post-container>ul>li').each(function(){
+            let self=$(this);
+            let deleteLink=$(' .delete-post-button',self);
+            deletePost(deleteLink);
+            
+            //And here also i have to take care of comment creation after it has been refreshed
+            // ....... 
+        });
     }
+    
+    createPost();
+    convertPostToAjax();
+    
     
 }

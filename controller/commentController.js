@@ -34,8 +34,10 @@ module.exports.Create=(req,res)=>{
                             comment:newComment,
                             username:post.user.name
                         },
-                        message:'Comment Posted'
-                    })
+                        message:'Comment Posted',
+                        type:'success',
+                        text:'Comment Posted'
+                    });
                 }
                  return res.redirect('back');
                 
@@ -58,6 +60,16 @@ module.exports.delete= async (req,res)=>{
             await Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.id} });
             req.flash('success','comment deleted');
 
+            if(req.xml){
+                return res.status(200).json({
+                    data:{
+                        commentId:req.query.id
+                    },
+                    type:'success',
+                    text:'Comment Deleted',
+                    message:'Comment Deleted Succesfully'
+                });
+            }
             return res.redirect('back');
 
 
@@ -65,7 +77,13 @@ module.exports.delete= async (req,res)=>{
         
         else
         {
-            req.flash('error','comment can not be deleted');
+            if(req.xml){
+                return res.status(401).json({
+                    message:'Comment Not deleted',
+                    type:'error',
+                    text:'Unauthorised'
+                })
+            }
 
             return res.redirect('back');
 

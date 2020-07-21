@@ -17,7 +17,7 @@
             </div>
             <div class="Comment-container">
 
-                <form class="comment-form" action="/comment/create?id=<%= p.id%>" method="post">
+                <form  id="post-<%=p.id%>-comment-form" action="/comment/create?id=<%= p.id%>" method="post">
                     <input type="text" name="content" placeholder="Add a Comment" required >
                     <input type="submit" value="comment" > 
                 </form>

@@ -2,7 +2,7 @@
     
 <div id="home-container">
     
-    <section id="feed-container" >
+    <section id="feed-container"  >
         
 
         <% if(locals.user){ %>
@@ -14,8 +14,8 @@
 
             <h1>Recent Posts</h1>
 
-            <div id="Post-container">
-                <ul>
+            <div id="Post-container" >
+                <ul >
                     <% for(let p of posts){ %>
                         <%- include('_post',{p:p})   %>
 
