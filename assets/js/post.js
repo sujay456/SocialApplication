@@ -26,9 +26,9 @@ let start=function(postId)
                 return (`
                 <li id="comment-${c._id}" >
                     
-                       
+                        <small>
                             <a class="delete-comment" href="/comment/delete?id=${c._id}">X</a>
-                        
+                        </small>
                     
                     
                     <p>${c.content}</p>
