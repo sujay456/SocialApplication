@@ -58,9 +58,9 @@ module.exports.delete= async (req,res)=>{
             comment.remove();
 
             await Post.findByIdAndUpdate(postId,{ $pull:{comment:req.query.id} });
-            req.flash('success','comment deleted');
+            
 
-            if(req.xml){
+            if(req.xhr){
                 return res.status(200).json({
                     data:{
                         commentId:req.query.id

@@ -24,7 +24,7 @@
             </div>
 
             <div class="comments-display" >
-                <ul>
+                <ul id="post-comments-<%=p.id%>">
                     <%  for(let c of p.comment){ %>
                         
                         <%- include('_comment',{c:c,p:p}) %>

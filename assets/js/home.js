@@ -21,6 +21,8 @@
 
                     // Here i will have to give commands so that user can comment on the newly generated post
                     // .....
+                    start(data.data.post._id);
+
                 },error: function(error){
                     console.log("error",error.responseText);
                 }
@@ -58,16 +60,16 @@
                         <p>${post.content}</p>
                         <small>${name}</small>
                     </div>
-                    <div class="Comment-container" onchange="commentchanged()">
+                    <div class="Comment-container" >
         
-                        <form  class="comment-form" action="/comment/create?id=${post._id}" method="post">
+                        <form  id="post-${post._id}-comment-form" action="/comment/create?id=${post._id}" method="post">
                             <input type="text" name="content" placeholder="Add a Comment" required >
                             <input type="submit" value="comment" > 
                         </form>
                     </div>
         
                     <div class="comments-display" >
-                        <ul>
+                        <ul id="post-comments-${ post._id }">
                             
                         </ul>
                     </div>
@@ -77,6 +79,7 @@
 
     let deletePost=function(deleteLink){
         // console.log(deleteLink);
+        // console.log($(deleteLink));
        $(deleteLink).click(function(e)
        {
            e.preventDefault();
@@ -107,6 +110,9 @@
             
             //And here also i have to take care of comment creation after it has been refreshed
             // ....... 
+
+            let postId=self.prop('id').split('-')[1];
+            start(postId);
         });
     }
     
