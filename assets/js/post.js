@@ -7,20 +7,20 @@ let start=function(postId)
             
             $.ajax({
                 type:'post',
-                            data:newCommentform.serialize(),
-                            url:$(newCommentform).prop('action'),
-                            success:function(data){
-                                console.log(data);
-                                let newComment= newCommentDom(data.data.comment,data.data.username);
-                                $(`#post-comments-${postId}`).prepend(newComment);
-                                notification(data.type,data.text);
-                                deleteComment($(' .delete-comment',newComment));
-                            },
-                            error:function(err){
-                                console.log(err.responseText);
-                            }
-                        })
-                    })
+                data:newCommentform.serialize(),
+                url:$(newCommentform).prop('action'),
+                success:function(data){
+                    console.log(data);
+                    let newComment= newCommentDom(data.data.comment,data.data.username);
+                    $(`#post-comments-${postId}`).prepend(newComment);
+                    notification(data.type,data.text);
+                    deleteComment($(' .delete-comment',postContainer));
+                    },
+                    error:function(err){
+                        console.log(err.responseText);
+                    }
+                })
+                })
     }
     let newCommentDom=function(c,name){
                 return (`
@@ -88,9 +88,9 @@ let start=function(postId)
 
 
 
-// //     
+//     
 
-// // For the notifcation part
+// For the notifcation part
 
 
 // Let's implement this via classes
@@ -128,7 +128,7 @@ let start=function(postId)
 //                 data: $(self).serialize(),
 //                 success: function(data){
 //                     let newComment = pSelf.newCommentDom(data.data.comment);
-//                     $(`#post-comments-${postId}`).prepend(newComment);
+//                     $(`#post-comment-${postId}`).prepend(newComment);
 //                     pSelf.deleteComment($(' .delete-comment', newComment));
 
 //                     new Noty({
@@ -156,7 +156,7 @@ let start=function(postId)
                         
                             
 //                             <small>
-//                                 <a class="delete-comment-button" href="/comments/destroy/${c._id}">X</a>
+//                                 <a class="delete-comment-button" href="/comments/delete?id=${c._id}">X</a>
 //                             </small>
                             
 //                             <p>${c.content}</p>

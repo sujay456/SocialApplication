@@ -22,6 +22,8 @@
                     // Here i will have to give commands so that user can comment on the newly generated post
                     // .....
                     start(data.data.post._id);
+                    // new PostComments(data.data.post._id);
+
 
 
                 },error: function(error){
@@ -114,6 +116,8 @@
 
             let postId=self.prop('id').split('-')[1];
             start(postId);
+            // new PostComments(postId);
+
 
         });
     }
