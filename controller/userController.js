@@ -1,5 +1,5 @@
 const User=require('../models/user');
-const { findOne } = require('../models/user');
+const { findOne, findById } = require('../models/user');
 
 module.exports.profile=(req,res)=>{
 
@@ -13,24 +13,51 @@ module.exports.profile=(req,res)=>{
     
 }
 
-module.exports.update=(req,res)=>{
+module.exports.update=async (req,res)=>{
+
+    // if(req.user.id==req.query.id)
+    // {
+    //     User.findByIdAndUpdate(req.query.id,req.body,(err,Updateduser)=>{
+    //         if(err)
+    //         {
+    //             console.log('Error in updating the user',err);
+    //             return;
+    //         }
+
+    //         return res.redirect('back');
+    //     });
+    // }
+    // else 
+    // {
+    //     return res.status(401).send('Unauthorized');
+    // }
 
     if(req.user.id==req.query.id)
     {
-        User.findByIdAndUpdate(req.query.id,req.body,(err,Updateduser)=>{
-            if(err)
-            {
-                console.log('Error in updating the user',err);
-                return;
-            }
+        try {
+            let user= await User.findById(req.query.id);
 
-            return res.redirect('back');
-        });
+            User.uploadedAvatar(req,res,function(err){
+                if(err)
+                {
+                    console.log('error',err);
+                    return;
+                }
+                console.log(req.file);
+            });
+        } catch (error) {
+            if(error)
+            {
+                console.log('error',error);
+                
+            }
+        }
     }
     else 
     {
         return res.status(401).send('Unauthorized');
     }
+
 }
 
 module.exports.signup=(req,res)=>{
