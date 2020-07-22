@@ -1,5 +1,6 @@
 const User=require('../models/user');
-const { findOne, findById } = require('../models/user');
+const fs =require('fs');
+const path=require('path');
 
 module.exports.profile=(req,res)=>{
 
@@ -43,7 +44,28 @@ module.exports.update=async (req,res)=>{
                     console.log('error',err);
                     return;
                 }
-                console.log(req.file);
+                user.name=req.body.name;
+                user.email=req.body.email;
+
+                if(req.file)
+                {
+                    if(user.avatar)
+                    {
+                        fs.existsSync(path.join(__dirname,'..',user.avatar),function(err,stat){
+                            if(err)
+                            {
+                                console.log(err);
+                                user.avatar=User.avatarPath+'/'+req.file.filename;
+                                return res.redirect('back');
+                            }
+                            console.log(stat);
+                            fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                        });
+                    }
+                    user.avatar=User.avatarPath+'/'+req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
             });
         } catch (error) {
             if(error)

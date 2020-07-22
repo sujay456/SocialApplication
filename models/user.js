@@ -25,7 +25,10 @@ const userSchema=new mongoose.Schema(
                 type:mongoose.Schema.Types.ObjectId,
                 ref:'Post'
             }
-        ]
+        ],
+        avatar:{
+            type:String
+        }
     },
     {
         timestamps:true
@@ -41,7 +44,7 @@ let storage = multer.diskStorage({
     }
   });
    
-userSchema.statics.uploadedAvatar=multer({storage: storage}).single('pic'); //this say only one file will be uploaded at a time
+userSchema.statics.uploadedAvatar=multer({storage: storage}).single('avatar'); //this say only one file will be uploaded at a time
 userSchema.statics.avatarPath=AVATAR_PATH;//This will be used in the controller
 
 const user=mongoose.model("User",userSchema);

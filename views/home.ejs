@@ -1,8 +1,20 @@
 <link rel="stylesheet" href="/css/home.css">
     
 <div id="home-container">
-    
-    <section id="feed-container"  >
+    <section id="Loggedin-pic" >
+        
+        <% if(locals.user){ %>
+            <% for(let u of user_friend){ %>
+                <% if(locals.user.id==u.id){ %>
+                    <img src="<%=u.avatar%>" alt="<%=u.name%>" height="200px">
+                <% } %>
+            <%}%>
+        <%}%>
+    </section>
+    <section id="feed-container" style="
+    width: 100%;
+    margin-left: 10px;
+" >
         
 
         <% if(locals.user){ %>

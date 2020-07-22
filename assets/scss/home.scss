@@ -3,11 +3,15 @@
     display: flex;
     justify-content: space-between;
     height:auto;
+    padding: 10px;
     // border: 1px solid black;
     #feed-conatiner
     {
-        width: 70%;
+        width: 100%;
         padding: 10px;
+        
+        // border: 1px solid red;
+
     }
     #users-friend
     {
@@ -15,6 +19,16 @@
         padding: 10px;
         border-left: 1px solid lightgrey;
         height: auto;
+        // border: 1px solid black;
+
+    }
+    #Loggedin-pic
+    {
+        width: auto;
+        border-right: 1px solid lightgrey;
+        // border: 1px solid black;
+        // overflow: hidden;
+        padding: 10px;
     }
 
 }
