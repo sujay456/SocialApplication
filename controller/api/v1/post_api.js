@@ -27,8 +27,8 @@ module.exports.delete= async (req,res)=>{
     try {
         let post=await Post.findById(req.params.id);
         // console.log(post);
-    // if(post.user==req.user.id)
-    //    {
+        if(post.user==req.user.id)
+       {
         
             let userId=post.user;
             post.remove();
@@ -49,11 +49,13 @@ module.exports.delete= async (req,res)=>{
             
 
         
-    //    }
-    //    else
-    //    {
-    //         return res.redirect('back');
-    //    }
+       }
+       else
+       {
+            return res.json(401,{
+                message:'Unauthorized'
+            });
+       }
     } catch (error) {
         console.log("Error",error);
         return res.json(500,{

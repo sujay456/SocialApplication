@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 
 let opts = {
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,  //this is jus telling to extract jwt from request 's header inside the authorization inside bearer token
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),  //this is jus telling to extract jwt from request 's header inside the authorization inside bearer token
     secretOrKey: 'benends' //this is key for decryption
 }
 
