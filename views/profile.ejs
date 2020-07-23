@@ -4,11 +4,11 @@
     <% if(locals.user.id ==  profile_user.id){ %>
             <!-- if equal show the user the updated from -->
 
-            <form action="/user/update?id=<%=profile_user.id%>" method="POST" enctype="multipart/form-data" >
+            <form id="update-form" action="/user/update?id=<%=profile_user.id%>" method="POST" enctype="multipart/form-data" >
                 
                 <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name%>" required >
                 <input type="email" name="email" placeholder="Your email" value="<%=profile_user.email%>" required >
-                <input type="file" name="avatar" placeholder="Profile picture" >
+                <input id="file-input" type="file" name="avatar" placeholder="Profile picture" onchange="loadFile(event)" >
                 <input type="submit" value="Update">
             </form>
 
@@ -17,3 +17,9 @@
             <p> <%= profile_user.email %> </p>
 
     <% } %>
+        <section id="preview">
+                
+                <img id="output" height="200px"> 
+        </section>
+
+    <script src="/js/profile.js"></script>

@@ -31,6 +31,7 @@ app.set('layout extractScripts',true);
 
 app.use(express.static('./assets'));
 app.use('/uploads',express.static('./uploads'));
+// app.use('/preview',express.static(''))
 
 // use express router
 app.set('view engine','ejs');

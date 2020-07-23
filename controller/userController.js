@@ -14,6 +14,8 @@ module.exports.profile=(req,res)=>{
     
 }
 
+
+
 module.exports.update=async (req,res)=>{
 
     // if(req.user.id==req.query.id)
