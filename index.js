@@ -13,7 +13,7 @@ const Mongostore=require('connect-mongo')(session);
 const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
 const CustomMware=require('./config/middleware');
-
+const passportJWT=require('./config/passport-jwt-strategy');
 app.use(sassMiddleware({
     src:'./assets/scss', //from where we are gonna find all sccs 
     dest:'./assets/css',
