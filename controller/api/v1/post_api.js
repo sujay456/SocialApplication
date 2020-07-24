@@ -27,6 +27,7 @@ module.exports.delete= async (req,res)=>{
     try {
         let post=await Post.findById(req.params.id);
         // console.log(post);
+        console.log('user',req.user);
         if(post.user==req.user.id)
        {
         
@@ -44,11 +45,6 @@ module.exports.delete= async (req,res)=>{
                     },
                     message:'post Deleted'
                 });
-            
-            
-            
-
-        
        }
        else
        {

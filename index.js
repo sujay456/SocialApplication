@@ -14,6 +14,7 @@ const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
 const CustomMware=require('./config/middleware');
 const passportJWT=require('./config/passport-jwt-strategy');
+const passportGoogle=require('./config/passport-google');
 app.use(sassMiddleware({
     src:'./assets/scss', //from where we are gonna find all sccs 
     dest:'./assets/css',
@@ -78,3 +79,6 @@ app.listen(port,(err)=>{
     }
     console.log(`Server is up and running: ${port} `);
 });
+
+// 917986733590-60ed7a9t044ovpcjmeikgpg706617705.apps.googleusercontent.com
+// yy-zCwz2p_Dd7ntKt7YJ8nKY
