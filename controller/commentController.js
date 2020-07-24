@@ -1,32 +1,27 @@
 const Comment=require('../models/comment');
+const commentMailer=require('../mailer/comments_mailer');
 const Post=require('../models/post');
-module.exports.Create=(req,res)=>{
+module.exports.Create=async (req,res)=>{
 
     // console.log(req.body);
     // console.log(req.query);
   
-    Post.findById(req.query.id)
-    .populate('user')
-    .exec((err,post)=>{
-        if(err)
+    let post=await Post.findById(req.query.id).populate('user');
+    
+    if(post)
         {
-            console.log('Error in finding the post on which u are commenting',err);
-            return;
-        }
-
-        if(post)
-        {
-            Comment.create( { 
+            let newComment=await Comment.create( { 
                 content:req.body.content,
                 user:req.user.id,
-                post:req.query.id },(err,newComment)=>{
-                if(err)
-                {
-                    console.log("Error in creating the comment",err);
-                    return;
-                }
+                post:req.query.id });
+
                 post.comment.push(newComment);
                 post.save();
+
+                newComment=await newComment.populate('user','name email').execPopulate();
+
+                commentMailer.newComment(newComment);
+
                 if(req.xhr)
                 {
                     return res.status(200).json({
@@ -40,11 +35,7 @@ module.exports.Create=(req,res)=>{
                     });
                 }
                  return res.redirect('back');
-                
-            });
         }
-        
-    })
 
 }
 
