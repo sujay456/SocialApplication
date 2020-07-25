@@ -1,6 +1,7 @@
 const express=require('express');
 const passport=require('passport');
 const UserController=require('../controller/userController');
+const { route } = require('./api');
 const router=express.Router();
 
 
@@ -15,7 +16,7 @@ router.get('/signout',UserController.signout);
 router.get('/resetform',UserController.resetForm);
 router.post('/access',UserController.access);
 router.get('/changePass',UserController.LinkClicked);
-
+router.post('/change',UserController.change);
 // Here passport will be used as a middleware
 router.post('/session',passport.authenticate(
     'local',

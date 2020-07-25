@@ -11,7 +11,7 @@ let transporter=nodemailer.createTransport({
     // identity ,who is sending the email
     auth:{
         user:'codingninjatest@gmail.com',
-        pass:'sujay@2001'
+        pass:'uafppoqwoknrdcpy'
     }
 });
 

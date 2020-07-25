@@ -1,6 +1,7 @@
 <form action="/user/change" method="POST">
 
     <input type="password" required name="password" placeholder="New password" >
-    <input type="password" required name="password"  placeholder="Confirm password" >
-
+    <input type="password" required name="Cpassword"  placeholder="Confirm password" >
+    <input type="hidden"  value="<%=userId%>" name="id" >
+    <input type="submit" value="Reset Password" >
 </form>

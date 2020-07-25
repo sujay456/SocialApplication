@@ -196,5 +196,42 @@ module.exports.access=async function(req,res){
 
 module.exports.LinkClicked=function(req,res)
 {
-    return res.send("hi you clicked this link");
+    Reset.findOne({accessToken:req.query.accessToken},function(err,reset){
+        if(err)
+        {
+            console.log("Error in finding the reset in accessToken",err);
+        }
+        console.log(reset);
+        if(reset.isValid)
+        {
+            reset.isValid=false;
+            reset.save();
+            return res.render('changePass',{
+                userId:reset.user._id
+            });
+        }
+        else
+        {
+            return res.send("Bad request Link is expired");
+        }
+    });
+}
+
+module.exports.change=(req,res)=>{
+    console.log(req.body);
+
+    if(req.body.password==req.body.Cpassword)
+    {
+        User.findByIdAndUpdate(req.body.id,{password:req.body.password},function(err,updatedUser){
+            if(err)
+            {
+                console.log(err);
+                return;
+            }
+            console.log(updatedUser);
+            return res.redirect('/user/signin');
+        });
+
+    }
+
 }
