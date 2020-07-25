@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/css/resetform.css">
+
+<h3>Reset Your Password</h3>
+
+
+
+    <% if(mailSent){ %>
+        <p>
+            Check Your mail for changing the password
+        </p>
+    <% }else{ %>
+        <form action="/user/access" method="post">
+            <input type="email" placeholder="Enter Your email" name="email" required >
+            <input type="submit" value="Submit">
+        </form>
+
+        <% } %>

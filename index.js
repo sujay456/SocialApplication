@@ -2,7 +2,7 @@ const express=require('express');
 const port=8000;
 const cookieParser=require('cookie-parser');
 const app=express();
-
+const kue=require('kue');
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 // For session creation from passport or any other authentication

@@ -1,6 +1,12 @@
 const User=require('../models/user');
+const Reset=require('../models/reset');
 const fs =require('fs');
 const path=require('path');
+const crypto=require('crypto');
+const reset_mailer=require('../mailer/reset_mailer');
+
+const queue=require('../config/kue');
+const reset_mailer_worker=require('../workers/reset_mailer_worker');
 
 module.exports.profile=(req,res)=>{
 
@@ -139,4 +145,56 @@ module.exports.signout=(req,res)=>
     req.flash('success','Logged Out');
 
     res.redirect('/user/signin');
+}
+
+module.exports.resetForm=function(req,res){
+
+    return res.render('resetform',{
+        mailSent:false
+    });
+}
+
+module.exports.access=async function(req,res){
+    
+    try {
+        let user=await User.findOne({email:req.body.email});
+        console.log("user",user);
+        if(!user)
+        {
+            
+            req.flash('error',"Invalid Username");
+            return res.redirect('back');
+        }
+        else
+        {
+           let reset=  await (await Reset.create({ user:user.id,accessToken:crypto.randomBytes(30).toString('hex'),isValid:true }));
+           reset=await reset.populate('user','email').execPopulate();
+
+        //    reset_mailer.newMailer(reset);
+            let job=queue.create('reset',reset).save(function(err)
+            {
+                if(err)
+                {
+                    console.log("Error in creating the job",err);
+                    return;
+
+                }
+
+                console.log("Your job is being enqued in the reset queue",job.id);
+            })
+
+
+            return res.render('resetform',{
+                mailSent:true
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
+
+module.exports.LinkClicked=function(req,res)
+{
+    return res.send("hi you clicked this link");
 }

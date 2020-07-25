@@ -12,6 +12,10 @@ router.post('/update',passport.CheckAuth,UserController.update);
 router.get('/signin',UserController.signin);
 router.get('/signup',UserController.signup);
 router.get('/signout',UserController.signout);
+router.get('/resetform',UserController.resetForm);
+router.post('/access',UserController.access);
+router.get('/changePass',UserController.LinkClicked);
+
 // Here passport will be used as a middleware
 router.post('/session',passport.authenticate(
     'local',
