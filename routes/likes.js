@@ -4,7 +4,7 @@ const LikeController=require('../controller/likeController');
 
 
 
-router.get('/toggle',LikeController.ToggleLike);
+router.post('/toggle',LikeController.ToggleLike);
 
 
 

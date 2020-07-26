@@ -1,7 +1,7 @@
 const Post=require('../models/post');
 const Comment=require('../models/comment');
 const Like=require('../models/like');
-const { query } = require('express');
+// const { query } = require('express');
 
 
 module.exports.ToggleLike= async function(req,res)

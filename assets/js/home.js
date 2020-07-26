@@ -22,9 +22,12 @@
                     Like($(' .like',newPost));
                     // Here i will have to give commands so that user can comment on the newly generated post
                     // .....
-                    start(data.data.post._id);
+                    // start(data.data.post._id);
                     // new PostComments(data.data.post._id);
+                    
+                    new PostComments(data.data.post._id);
 
+                    new ToggleLike($(' .toggle-like-button', newPost));
 
 
                 },error: function(error){
@@ -79,17 +82,22 @@
                 <li id="post-${post._id}" >
                     
                                               
-                    <div class="Post-Container">
+                    <div class="Post-Container_">
                         
-                        <div class="like">
-                            <span>${post.like.length}</span>
-                            <a class="like-button" href="/like/toggle?id=${post._id}&type=Post">Like</a>
-                        </div>
+                        
                         
                         
                             <small>
                                 <a class="delete-post-button" href="/post/delete/${post._id}" >X</a>
                             </small>
+
+                            <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/like/toggle?id=${post._id}&type=Post">
+                                    0 Likes
+                                </a>
+                            
+                        </small>
                         
                          
                         <p>${post.content}</p>
@@ -148,8 +156,8 @@
             // ....... 
 
             let postId=self.prop('id').split('-')[1];
-            start(postId);
-            // new PostComments(postId);
+            // start(postId);
+            new PostComments(postId);
 
 
         });

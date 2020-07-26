@@ -4,12 +4,13 @@
             
             
             
-            <div class="Post-Container">
+            <div class="Post-Container_">
                 
-                <div class="like" >
-                    <span><%=p.like.length%></span>
-                    <a class="like-button" href="/like/toggle?id=<%=p.id%>&type=Post">Like</a>
-                </div>
+                <small>
+                    <a class="toggle-like-button" data-likes="<%= p.like.length %>" href="/like/toggle?id=<%=p._id%>&type=Post">
+                    <%= p.like.length %> Likes
+                </a>
+                </small>
 
                 
 
