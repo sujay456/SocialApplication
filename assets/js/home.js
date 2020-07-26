@@ -17,6 +17,7 @@
                     let newPost=newPostDom(data.data.post,data.data.username);
                     $('#Post-container>ul').prepend(newPost);
                     notification(data.type,data.text);
+                    console.log('blah',$(' .like',newPost));
                     deletePost($(' .delete-post-button',newPost));
                     Like($(' .like',newPost));
                     // Here i will have to give commands so that user can comment on the newly generated post

@@ -1,10 +1,12 @@
+// const e = require("express");
+
 let start=function(postId)
 {
     let createComment=function(postId){
         // let newCommentform =$(`#post-${postId}-comment-form`);
         newCommentform.submit(function(event){
             event.preventDefault();
-            
+                
             $.ajax({
                 type:'post',
                 data:newCommentform.serialize(),
@@ -13,19 +15,61 @@ let start=function(postId)
                     console.log(data);
                     let newComment= newCommentDom(data.data.comment,data.data.username);
                     $(`#post-comments-${postId}`).prepend(newComment);
+                    
                     notification(data.type,data.text);
+                    
+                    
+                    console.log($(' .like-comment',newComment));
+                    
+                    Like($(' .like-comment',newComment));
+                    
                     deleteComment($(' .delete-comment',postContainer));
                     },
+                    
                     error:function(err){
                         console.log(err.responseText);
                     }
                 })
-                })
+            })
+    }
+    let Like=function(Like)
+    {
+        let LikeButton=$(' .like-button',Like);
+        let LikeNumber=$(' span',Like);
+
+        console.log("Like button",$(LikeButton));
+        console.log('Like number',$(LikeNumber));
+        
+        $(LikeButton).click(function(e)
+        {
+            e.preventDefault();
+        
+            $.ajax({
+                type:'get',
+                url:$(LikeButton).prop('href'),
+                success:function(data)
+                {
+                    console.log(data);
+                    console.log($(LikeNumber));
+
+                    $(LikeNumber)[0].innerHTML=data.data.numberLikes;
+                },error:function(err)
+                {
+                    console.log(err.responseText);
+                    
+                }
+            });
+        });
     }
     let newCommentDom=function(c,name){
                 return (`
                 <li id="comment-${c._id}" >
-                    
+
+                        <div class="like-comment">
+                            <span>${c.like.length}</span>
+                            <a class="like-button" href="/like/toggle?id=${c._id}&type=Comment">Like</a>
+                        </div>
+
                         <small>
                             <a class="delete-comment" href="/comment/delete?id=${c._id}">X</a>
                         </small>
@@ -77,6 +121,11 @@ let start=function(postId)
     
     createComment(postId);
     
+    $(' .like-comment',postContainer).each(function()
+    {
+        Like($(this));
+    });
+
     $(' .delete-comment',postContainer).each(function(){
         console.log($(this));
         deleteComment($(this));

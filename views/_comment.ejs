@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="/css/comment.css">
 
 <li id="comment-<%=c.id%>" >
-    <span><%=c.like.length %></span>
-    <a href="/like/toggle?id=<%=c.id%>&type=Comment">Like</a>
-    <br>
+    
+    <div class="like-comment" >
+        <span><%=c.like.length%></span>
+        <a class="like-button" href="/like/toggle?id=<%=c.id%>&type=Comment">Like</a>
+    </div>
+    
     <% if(locals.user.id==c.user.id){ %>
         <small>
-            
-            
             <a class="delete-comment" href="/comment/delete?id=<%=c.id%>">X</a>
         </small>
     <%}%>
