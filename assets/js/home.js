@@ -79,6 +79,7 @@
                     
                                               
                     <div class="Post-Container">
+                        
                         <div class="like">
                             <span>${post.like.length}</span>
                             <a class="like-button" href="/like/toggle?id=${post._id}&type=Post">Like</a>
@@ -140,7 +141,8 @@
             let self=$(this);
             let deleteLink=$(' .delete-post-button',self);
             deletePost(deleteLink);
-            
+            let like=$(' .like',self);
+            Like(like);
             //And here also i have to take care of comment creation after it has been refreshed
             // ....... 
 
