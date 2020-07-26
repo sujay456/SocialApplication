@@ -18,7 +18,7 @@
                     $('#Post-container>ul').prepend(newPost);
                     notification(data.type,data.text);
                     deletePost($(' .delete-post-button',newPost));
-
+                    Like($(' .like',newPost));
                     // Here i will have to give commands so that user can comment on the newly generated post
                     // .....
                     start(data.data.post._id);
@@ -32,7 +32,34 @@
             })
         })
     }
+    let Like=function(like)
+    {
+        let likeButton=$(' .like-button',like);
+        let likeNumber=$(' span',like);
+        console.log($(likeNumber));
+        console.log('likebutton',$(likeButton));
 
+        $(likeButton).click(function(e)
+        {
+            e.preventDefault();
+
+            $.ajax({
+                type:'get',
+                url:$(likeButton).prop('href'),
+                success:function(data)
+                {
+                    console.log(data);
+                    console.log($(likeNumber));
+                    $(likeNumber)[0].innerHTML=data.data.numberLikes;
+
+                },
+                error:function(err)
+                {
+                    console.log('Error in ajax call',err.responseText);
+                }
+            });
+        });
+    }
     let notification=function(type,text)
     {
         new Noty({
@@ -52,8 +79,11 @@
                     
                                               
                     <div class="Post-Container">
+                        <div class="like">
+                            <span>${post.like.length}</span>
+                            <a class="like-button" href="/like/toggle?id=${post._id}&type=Post">Like</a>
+                        </div>
                         
-        
                         
                             <small>
                                 <a class="delete-post-button" href="/post/delete/${post._id}" >X</a>

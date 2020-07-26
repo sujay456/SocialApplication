@@ -2,12 +2,21 @@
     
         <li id="post-<%=p.id%>" >
             
-                                      
+            
+            
             <div class="Post-Container">
+                
+                <div class="like" >
+                    <span><%=p.like.length%></span>
+                    <a id="like-<%=p.id%>" href="/like/toggle?id=<%=p.id%>&type=Post">Like</a>
+                </div>
+
                 
 
                 <% if(locals.user.id==p.user.id){ %>
                     <small>
+                        
+
                         <a class="delete-post-button" href="/post/delete/<%=p.id%>" >X</a>
                     </small>
                 <%}%>

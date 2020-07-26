@@ -1,7 +1,7 @@
 const Post=require('../models/post');
 const User=require('../models/user');
 const Comment=require('../models/comment');
-
+const Like=require('../models/like');
 
 // -----------------without async await------------
 // module.exports.postCreate=(req,res)=>{
@@ -109,3 +109,4 @@ module.exports.delete= async (req,res)=>{
     }
 
 }
+
