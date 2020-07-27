@@ -14,3 +14,31 @@
         }
         $('#preview').append(output);
       };
+
+      console.log('hi');
+      $('#FriendRequest').click(function(e){
+        e.preventDefault();
+
+        $.ajax({
+          type:'get',
+          url:$(this).prop('href'),
+          success:function(data)
+          {
+            console.log(data);
+            console.log($('#FriendRequest'));
+
+            if(data.type==1)
+            {
+              $('#FriendRequest')[0].innerHTML='Remove from Friend';
+            }else
+            { 
+              $('#FriendRequest')[0].innerHTML='Add Friend';
+
+            }
+          }
+          ,error:function(err)
+          {
+            console.log('err',err);
+          }
+        });
+      });

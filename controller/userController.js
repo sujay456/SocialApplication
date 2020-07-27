@@ -4,18 +4,39 @@ const fs =require('fs');
 const path=require('path');
 const crypto=require('crypto');
 const reset_mailer=require('../mailer/reset_mailer');
+const Friend=require('../models/friendship');
 
 const queue=require('../config/kue');
 const reset_mailer_worker=require('../workers/reset_mailer_worker');
 
 module.exports.profile=(req,res)=>{
 
-    
-        User.findById(req.query.userid,(err,user)=>{
-            return res.render('profile',{
-                profile_user:user
+    Friend.findOne({from_whom:req.user.id,to_whom:req.query.userid},function(err,friendship){
+        if(err)
+        {
+            return;
+        }
+        if(friendship)
+        {
+            User.findById(req.query.userid,(err,user)=>{
+                return res.render('profile',{
+                    profile_user:user,
+                    type:'Remove Friend'
+                });
             });
-        })
+        }
+        else
+        {
+            User.findById(req.query.userid,(err,user)=>{
+                return res.render('profile',{
+                    profile_user:user,
+                    type:'Add Friend'
+
+                });
+            });
+        }
+    })
+        
     
     
 }

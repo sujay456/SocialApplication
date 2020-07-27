@@ -37,22 +37,26 @@
             </div>
         
 
-        <% } %>
+            
+        
 
     </section>
-
     <section id="users-friend" >   
 
-            <h4>Friends</h4>
+        <h4>Users</h4>
 
-            <% for(u of user_friend){ %>
-                
+        <% for(u of user_friend){ %>
+            
+           <% if(locals.user.id!=u.id){ %>
                 <p>
                     <a href="/user/profile?userid=<%=u.id%>"><%= u.name %></a>
                 </p>
             <%}%>
+        <%}%>
+        <% } %>
+</section>
 
-    </section>
+    
 </div>
 <script src="/js/post.js"></script>
 <script src="/js/home.js" ></script>
