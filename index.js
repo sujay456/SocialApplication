@@ -15,6 +15,13 @@ const flash=require('connect-flash');
 const CustomMware=require('./config/middleware');
 const passportJWT=require('./config/passport-jwt-strategy');
 const passportGoogle=require('./config/passport-google');
+
+const chatServer=require('http').Server(app);
+const chatSocket=require('./config/chat_socket').chatSocket(chatServer);
+chatServer.listen(5000);
+
+
+
 app.use(sassMiddleware({
     src:'./assets/scss', //from where we are gonna find all sccs 
     dest:'./assets/css',
