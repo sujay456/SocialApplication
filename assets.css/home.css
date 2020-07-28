@@ -1,0 +1,1 @@
+#home-container{display:flex;justify-content:space-between;height:auto;padding:10px}#home-container #feed-conatiner{width:100%;padding:10px}#home-container #users-friend{width:30%;padding:10px;border-left:1px solid #d3d3d3;height:auto}#home-container #Loggedin-pic{width:auto;border-right:1px solid #d3d3d3;padding:10px}

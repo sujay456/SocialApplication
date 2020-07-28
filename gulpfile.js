@@ -11,7 +11,7 @@ const del = require('del');
 
 gulp.task('css', function(done){
     console.log('minifying css...');
-    gulp.src('./assets/sass/**/*.scss')
+    gulp.src('./assets/scss/**/*.scss')
     .pipe(sass())
     .pipe(cssnano())
     .pipe(gulp.dest('./assets.css'));
@@ -20,7 +20,8 @@ gulp.task('css', function(done){
     .pipe(rev())
     .pipe(gulp.dest('./public/assets'))
     .pipe(rev.manifest({
-        cwd: 'public',
+        // cwd: 'public',
+        base:'./public/assets',
         merge: true
     }))
     .pipe(gulp.dest('./public/assets'));
@@ -35,7 +36,8 @@ gulp.task('js', function(done){
     .pipe(rev())
     .pipe(gulp.dest('./public/assets'))
     .pipe(rev.manifest({
-        cwd: 'public',
+        // cwd: 'public',
+        base:'./public/assets',
         merge: true
     }))
     .pipe(gulp.dest('./public/assets'));
@@ -50,13 +52,18 @@ gulp.task('images', function(done){
     .pipe(rev())
     .pipe(gulp.dest('./public/assets'))
     .pipe(rev.manifest({
-        cwd: 'public',
+        // cwd: 'public',       
+        base:'./public/assets',                      
         merge: true
     }))
     .pipe(gulp.dest('./public/assets'));
     done();
 });
-
+   //but sir why it was not workin earlier on  ythe sign up page  ab gulp mein kuch new changes aaye h so
+//    ok now it will work? see its working
+// ok 1 sec
+// this?  bro jb login honge tb na ye convert krega so isliye ye error show ho rha h .. ye koi prob ni h ok
+// ok i get it now thanx rate well :)
 
 // empty the public/assets directory
 gulp.task('clean:assets', function(done){

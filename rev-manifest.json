@@ -7,5 +7,10 @@
   "css/layout.css": "css/layout-186033d20b.css",
   "css/resetform.css": "css/resetform-8d150467c1.css",
   "css/signin.css": "css/signin-cd03adba8f.css",
-  "img/james.jpg": "img/james-2c51a36c75.jpg"
+  "img/james.jpg": "img/james-2c51a36c75.jpg",
+  "js/chat_engine.js": "js/chat_engine-e0f8eb051a.js",
+  "js/home.js": "js/home-1ac582f3db.js",
+  "js/post.js": "js/post-91ab9aa823.js",
+  "js/profile.js": "js/profile-a73b817bfe.js",
+  "js/toggleLike.js": "js/toggleLike-503d007b40.js"
 }
