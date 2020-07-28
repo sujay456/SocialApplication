@@ -1,5 +1,6 @@
 const express=require('express');
 const env=require('./config/environment');
+const logger=require('morgan');
 const port=8000;
 const cookieParser=require('cookie-parser');
 const app=express();
@@ -24,13 +25,18 @@ chatServer.listen(5000);
 
 
 // console.log(path.join(__dirname,env.asset_path,'scss'));
-app.use(sassMiddleware({
-    src:path.join(__dirname,env.asset_path,'scss'), //from where we are gonna find all sccs 
-    dest:path.join(__dirname,env.asset_path,'css'),
-    debug:true,
-    outputStyle:'extended',
-    prefix:'/css'
-}))
+
+if(env.name=='development')
+{
+    app.use(sassMiddleware({
+        src:path.join(__dirname,env.asset_path,'scss'), //from where we are gonna find all sccs 
+        dest:path.join(__dirname,env.asset_path,'css'),
+        debug:true,
+        outputStyle:'extended',
+        prefix:'/css'
+    }));
+}
+app.use(logger(env.morgan.mode,env.morgan.option));
 app.use(express.urlencoded());
 
 app.use(cookieParser());

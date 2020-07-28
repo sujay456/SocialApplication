@@ -1,0 +1,13 @@
+#signin-form {
+  display: inline-block;
+  margin-right: 10px; }
+  #signin-form #login-button {
+    background-color: #343464;
+    color: white;
+    border: none;
+    padding: 3px;
+    font-family: sans-serif;
+    width: 50px;
+    cursor: pointer; }
+  #signin-form #login-button:hover {
+    background-color: #18185f; }

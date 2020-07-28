@@ -15,7 +15,7 @@
         $('#preview').append(output);
       };
 
-      console.log('hi');
+      // console.log('hi');
       $('#FriendRequest').click(function(e){
         e.preventDefault();
 
@@ -25,7 +25,7 @@
           success:function(data)
           {
             console.log(data);
-            console.log($('#FriendRequest'));
+            // console.log($('#FriendRequest'));
 
             if(data.type==1)
             {

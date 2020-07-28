@@ -17,7 +17,7 @@
                     let newPost=newPostDom(data.data.post,data.data.username);
                     $('#Post-container>ul').prepend(newPost);
                     notification(data.type,data.text);
-                    console.log('blah',$(' .like',newPost));
+                    // console.log('blah',$(' .like',newPost));
                     deletePost($(' .delete-post-button',newPost));
                     Like($(' .like',newPost));
                     // Here i will have to give commands so that user can comment on the newly generated post
@@ -40,8 +40,8 @@
     {
         let likeButton=$(' .like-button',like);
         let likeNumber=$(' span',like);
-        console.log($(likeNumber));
-        console.log('likebutton',$(likeButton));
+        // console.log($(likeNumber));
+        // console.log('likebutton',$(likeButton));
 
         $(likeButton).click(function(e)
         {
@@ -53,7 +53,7 @@
                 success:function(data)
                 {
                     console.log(data);
-                    console.log($(likeNumber));
+                    // console.log($(likeNumber));
                     $(likeNumber)[0].innerHTML=data.data.numberLikes;
 
                 },
