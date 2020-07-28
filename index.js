@@ -1,4 +1,5 @@
 const express=require('express');
+const env=require('./config/environment');
 const port=8000;
 const cookieParser=require('cookie-parser');
 const app=express();
@@ -15,16 +16,17 @@ const flash=require('connect-flash');
 const CustomMware=require('./config/middleware');
 const passportJWT=require('./config/passport-jwt-strategy');
 const passportGoogle=require('./config/passport-google');
+const path=require('path');
 
 const chatServer=require('http').Server(app);
 const chatSocket=require('./config/chat_socket').chatSocket(chatServer);
 chatServer.listen(5000);
 
 
-
+// console.log(path.join(__dirname,env.asset_path,'scss'));
 app.use(sassMiddleware({
-    src:'./assets/scss', //from where we are gonna find all sccs 
-    dest:'./assets/css',
+    src:path.join(__dirname,env.asset_path,'scss'), //from where we are gonna find all sccs 
+    dest:path.join(__dirname,env.asset_path,'css'),
     debug:true,
     outputStyle:'extended',
     prefix:'/css'
@@ -37,7 +39,7 @@ app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 
-app.use(express.static('./assets'));
+app.use(express.static(path.join(__dirname,env.asset_path)));
 app.use('/uploads',express.static('./uploads'));
 // app.use('/preview',express.static(''))
 
@@ -50,7 +52,7 @@ app.set('views','./views');
 app.use(session(
     {
         name:'benends', //name of cookie
-        secret:'blahsomething',
+        secret:env.session_cookie_key,
         saveUninitialized:false,
         resave:false,
         cookie:{

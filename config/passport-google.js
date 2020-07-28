@@ -1,14 +1,14 @@
 const passport=require('passport');
 const googleStrategy=require('passport-google-oauth').OAuth2Strategy;
-
+const env=require('./environment');
 const crypto=require('crypto'); //for generating new random password 
 const User=require('../models/user');
 
 // tell passprt to use a new startegy for google login
 passport.use(new googleStrategy({
-    clientID:"917986733590-60ed7a9t044ovpcjmeikgpg706617705.apps.googleusercontent.com",
-    clientSecret:"yy-zCwz2p_Dd7ntKt7YJ8nKY",
-    callbackURL:'http://localhost:8000/user/auth/google/callback',
+    clientID:env.google_clientID,
+    clientSecret:env.google_clientSecret,
+    callbackURL:env.google_callbackURL,
     },
     function(accessToken,refreshToken,profile,done){
         // find a user if found set this user as req.user
