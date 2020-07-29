@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/css/home.css">
-<link rel="stylesheet" href="/css/chatbox.css">    
+<link rel="stylesheet" href="<%= assetPath('css/home.css') %>">
+<link rel="stylesheet" href="<%= assetPath('css/chatbox.css') %>">    
 <div id="home-container">
     <section id="Loggedin-pic" >
         
@@ -59,10 +59,12 @@
     <%- include('_chatbox') %>
     
 </div>
-<script src="/js/post.js"></script>
-<script src="/js/home.js" ></script>
+<script src="<%= assetPath('js/post.js') %>"></script>
 
-<script src="js/toggleLike.js"></script>
+<script src="<%= assetPath('js/home.js') %>" ></script>
+
+
+<script src="<%= assetPath('js/toggleLike.js') %>"></script>
 <script>
     $('.toggle-like-button').each(function(){
         let self = this;
@@ -71,7 +73,7 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 
 
 <% if(locals.user){%>
